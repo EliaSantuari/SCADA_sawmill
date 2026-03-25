@@ -8,8 +8,8 @@ h1 = 70; % spessore per M1 [mm]
 h2 = 18; 
 n_sottili = 4;
 w = 50; % spessore per M2 [mm]
-Mag_legno = [0 1 5 2 4 3]; % tipologia di legno [0 randi([1 5],1,10)] per vettore con valori randomici
-Mag_D = [0 430 320 260 230 540]; % diametro del tronco
+Mag_legno = [0 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3]; % tipologia di legno [0 randi([1 5],1,10)] per vettore con valori randomici
+Mag_D = [0 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540]; % diametro del tronco
 kc = [0 35 40 50 55 90];
 Lt = 4; % lunghezza tronchi [m]
 
@@ -55,3 +55,19 @@ Tdamp2 = B2*omega2*SR2;
 Tloss2 = Tatt2+ Tdamp2;
 
 
+%% PRODOTTI FINALI
+N_altezze = 2;
+N_larghezze = 2;
+
+% altezze e larghezze di cui dispongo
+h_index = [70, 80, 90];
+l_index = [50, 60, 70];
+
+% MATRICE TARGET - h:righe - l:colonne
+target_matrice = [50, 100, 50;
+                  25, 95, 15;
+                  50, 25, 35];
+
+
+
+%% VISUALIZZAZIONE MAGAZZINO
