@@ -8,11 +8,31 @@ h1 = 70; % spessore per M1 [mm]
 h2 = 18; 
 n_sottili = 4;
 w = 50; % spessore per M2 [mm]
+
+% A linea singola
 Mag_legno = [0 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3 1 5 2 4 3]; % tipologia di legno [0 randi([1 5],1,10)] per vettore con valori randomici
 Mag_D = [0 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540 430 320 260 230 540]; % diametro del tronco
+
+% Linea 1
+% Mag_legno1 = [0 1 5 2 4 3 1 3 5 4 2 2 3 5 3 4 1 1 3 4 2]; % tipologia di legno [0 randi([1 5],1,10)] per vettore con valori randomici
+% Mag_D1 = [0 430 320 260 230 540 430 320 400 290 350 320 370 410 550 280 390 310 610 400 310]; % diametro del tronco
+Mag_legno1 = [0 randi([1 5], 1, 40)];
+Mag_D1 = [0 randi([220 500], 1, 40)];
+
+% Linea 2
+% Mag_legno2 = [0 2 3 5 3 4 1 1 3 4 2 5 3 4 2 2 3 1 5 3 1];
+% Mag_D2 = [0 250 470 600 320 290 510 300 380 430 210 430 320 260 230 540 430 320 400 290 350];
+Mag_legno2 = [0 randi([1 5], 1, 40)];
+Mag_D2 = [0 randi([220 500], 1, 40)];
+
+% Linea 3
+% Mag_legno3 = [0 5 3 4 2 2 3 1 5 3 1 1 5 2 4 3 1 3 5 4 2];
+% Mag_D3 = [0 320 370 410 550 280 390 310 610 400 310 250 470 600 320 290 510 300 380 430 210];
+Mag_legno3 = [0 randi([1 5], 1, 40)];
+Mag_D3 = [0 randi([220 500], 1, 40)];
+
 kc = [0 35 40 50 55 90];
 Lt = 4; % lunghezza tronchi [m]
-
 
 %% Paremtri Macchina 1
 
@@ -36,6 +56,9 @@ Tloss = Tatt+ Tdamp;
 
 %% Parametri Macchina 2
 
+% Threashold parallelo
+thrsh = 40;
+
 %Sega
 t2 = 5; % spessore lama [mm]
 s2 = 0.5*t2; % stradatura [mm]
@@ -54,20 +77,43 @@ SR2 = Rc/Rm2;
 Tdamp2 = B2*omega2*SR2;
 Tloss2 = Tatt2+ Tdamp2;
 
-
 %% PRODOTTI FINALI
-N_altezze = 2;
-N_larghezze = 2;
+
 
 % altezze e larghezze di cui dispongo
-h_index = [70, 80, 90];
-l_index = [50, 60, 70];
+h_index = [70, 80, 90, 100, 110];
+l_index = [20, 30, 40, 50, 60];
 
 % MATRICE TARGET - h:righe - l:colonne
-target_matrice = [50, 100, 50;
-                  25, 95, 15;
-                  50, 25, 35];
+% target_matrice = [100, 95, 150;
+%                   40, 200, 70;
+%                   50, 25, 55];
+
+target_matrice = randi([20, 150], length(h_index), length(l_index));
 
 
 
-%% VISUALIZZAZIONE MAGAZZINO
+
+% PARTO A PRODURRE QUELLI CON PIù DEFICIT
+deficit = target_matrice;
+[val, idx] = sort(deficit(:), 'descend');
+
+[h_start_1, l_start_1] = ind2sub(size(target_matrice), idx(1));
+[h_start_2, l_start_2] = ind2sub(size(target_matrice), idx(2));
+[h_start_3, l_start_3] = ind2sub(size(target_matrice), idx(3));
+
+
+
+
+
+%% prova vettore
+% clear all;
+
+% deficit = [1 5 3;
+%            8 2 4;
+%            10 3 6];
+% 
+% [max, idx] = sort(deficit(:), 'descend');
+% 
+% second_linear_idx = idx(2);
+% [row, col] = ind2sub(size(deficit), second_linear_idx);
