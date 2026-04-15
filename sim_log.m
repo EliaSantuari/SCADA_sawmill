@@ -1,4 +1,4 @@
-
+close all
 % Carica i dati dal log di Simulink
 data = out.Magazzino_log.Data; 
 time = out.Magazzino_log.Time;
@@ -32,7 +32,7 @@ ylabel('Quantità Assi');
 xlabel('Specifiche Sezione (Altezza H x Larghezza L)');
 title('Monitoraggio Magazzino per Tipologia Prodotto');
 
-% Colori
+% Colori 
 color_working = [0 0.447 0.741]; 
 color_finished = [0.466 0.674 0.188]; 
 

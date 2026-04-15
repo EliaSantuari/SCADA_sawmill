@@ -46,7 +46,7 @@ Rs = 800; % raggio volani [mm]
 % Motore
 Kt = 2;
 i_id = 60;
-% i_max = 100;
+i_max = 100;
 Rm = 150; %[m]
 B = 0.05; %[Nm s/rad]
 Tatt = 4; %[Nm]
@@ -81,15 +81,18 @@ Tloss2 = Tatt2+ Tdamp2;
 
 
 % altezze e larghezze di cui dispongo
-h_index = [70, 80, 90, 100, 110];
-l_index = [20, 30, 40, 50, 60];
+h_index = [70, 80, 90, 100];
+l_index = [20, 30, 40, 50];
 
 % MATRICE TARGET - h:righe - l:colonne
 % target_matrice = [100, 95, 150;
 %                   40, 200, 70;
 %                   50, 25, 55];
 
-target_matrice = randi([20, 150], length(h_index), length(l_index));
+target_matrice = randi([20, 120], length(h_index), length(l_index));
+
+% target_matrice = [600, 100;
+%                   100, 100];
 
 
 
@@ -101,6 +104,9 @@ deficit = target_matrice;
 [h_start_1, l_start_1] = ind2sub(size(target_matrice), idx(1));
 [h_start_2, l_start_2] = ind2sub(size(target_matrice), idx(2));
 [h_start_3, l_start_3] = ind2sub(size(target_matrice), idx(3));
+[h_start_4, l_start_4] = ind2sub(size(target_matrice), idx(4));
+[h_start_5, l_start_5] = ind2sub(size(target_matrice), idx(5));
+[h_start_6, l_start_6] = ind2sub(size(target_matrice), idx(6));
 
 
 
