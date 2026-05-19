@@ -32,7 +32,7 @@ sez_totali = {sez_m2_l1, sez_m3_l1, sez_m2_l2, sez_m3_l2, sez_m2_l3, sez_m3_l3};
 %% 2. Pre-calcolo della produzione per ogni istante
 % Creiamo una matrice 3D [Bins x Macchine x Tempo] per l'animazione
 % NOTA: Per velocizzare l'animazione, campioniamo il tempo (es. ogni 100 step)
-step_animazione = 100; 
+step_animazione = 500; 
 time_indices = 1:step_animazione:size(assi_instant, 1);
 
 % Inizializziamo la matrice dei conteggi accumulati nel tempo

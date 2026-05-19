@@ -1,6 +1,6 @@
 
 
-n_m = 3; % n_macchina
+n_m = 1; % n_macchina
 
 
 % (max_boards_number, n_machines, t_steps)
@@ -8,6 +8,7 @@ posterior = out.posterior.Data(:, n_m, :);
 likelihood = out.likelihood.Data(:, n_m, :);
 prior = out.prior.Data(:, n_m, :);
 true = out.assi_instant.Data(:, n_m);
+n_assi_stim = out.n_assi_stim;
 
 non_nulle_posterior = any(posterior, [1 2]);
 non_nulle_likelihood = any(likelihood, [1 2]);
@@ -34,18 +35,19 @@ true = true(non_nulle_true);
 
 assi = (1:size(posterior,1))'; % possibili valori
 
-E_post = squeeze(sum(posterior .* assi, 1));
+E_post = round(squeeze(sum(posterior .* assi, 1)));
 E_like = squeeze(sum(likelihood .* assi, 1));
 E_prior = squeeze(sum(prior .* assi, 1));
 
 
 
 figure(1000)
-plot(E_post, 'r', 'LineWidth', 2); hold on;
+hold on;
 plot(E_like, 'b');
-plot(E_prior, 'g');
+plot(E_prior, 'g', 'LineWidth', 2); 
+plot(E_post, 'r', 'LineWidth', 2);
 plot(true, 'k--', 'LineWidth', 2);
-legend("Posterior", "Likelihood", "Prior", "True")
+legend("Likelihood", "Prior", "Posterior", "True")
 xlabel("Time step")
 ylabel("Numero assi stimato")
 grid on

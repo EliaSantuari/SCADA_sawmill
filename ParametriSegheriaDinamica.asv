@@ -20,7 +20,7 @@ Mag_D2 = [0 randi([200 500], 1, N_log)];
 
 % Linea 3
 Mag_legno3 = [0 randi([1 5], 1, N_log)];
-Mag_D3 = [0 randi([200 500], 1, N_log)];
+Mag_D3 = [0 randi([200 400], 1, N_log)];
 
 
 
@@ -78,9 +78,9 @@ target_matrice = randi([20, 100], length(h_index), length(l_index));
 
 
 % per differenza tra indipendenti e distribuiti
-% target_matrice = [50, 50, 50;
-%                   50, 50, 50;
-%                   50, 50, 50];
+target_matrice = [50, 50, 50;
+                  50, 50, 50;
+                  50, 50, 50];
 
 % target_matrice = [600, 100;
 %                   100, 100];
@@ -101,21 +101,21 @@ deficit = target_matrice;
 [h_start_6, l_start_6] = ind2sub(size(target_matrice), idx(6));
 
 % per differenza tra indipendenti e distribuiti
-% % PRIMA LINEA: taglia (1,1) e (1,1)
-% h_start_1 = 1;
-% l_start_1 = 1;
-% h_start_4 = 1;
-% l_start_4 = 1;
-% % SECONDA LINEA: taglia (2,1) e (2,2)
-% h_start_2 = 2;
-% l_start_2 = 1;
-% h_start_5 = 2;
-% l_start_5 = 1;
-% % TERZA LINEA: taglia (3,1) e (3,2)
-% h_start_3 = 3;
-% l_start_3 = 1;
-% h_start_6 = 3;
-% l_start_6 = 1;
+% PRIMA LINEA: taglia (1,1) e (1,1)
+h_start_1 = 1;
+l_start_1 = 1;
+h_start_4 = 1;
+l_start_4 = 1;
+% SECONDA LINEA: taglia (2,1) e (2,2)
+h_start_2 = 2;
+l_start_2 = 1;
+h_start_5 = 1;
+l_start_5 = 2;
+% TERZA LINEA: taglia (3,1) e (3,2)
+h_start_3 = 3;
+l_start_3 = 1;
+h_start_ = 1;
+l_start_6 = 3;
 
 
 % Soglia di lavoro per cambio lame consumate
@@ -126,6 +126,6 @@ thr_lavoro = 600000;
 sigma_D = 10; % Incertezza sulla misura del diametro
 sigma_larg = 10; % Incertezza sulla misura della larghezza
 
-sigma_cam = 0.5; % Incertezza della camera
+sigma_cam = 1; % Incertezza della camera
 
 

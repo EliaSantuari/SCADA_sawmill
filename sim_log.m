@@ -1,9 +1,9 @@
 
 % Carica i dati dal log di Simulink
-data = out.Magazzino_log.Data; 
+data = out.Magazzino_log.Data;
 time = out.Magazzino_log.Time;
 
-dTa = 1; % step per velocizzare animazione;
+dTa = 10; % step per velocizzare animazione;
 
 
 [H_dim, L_dim, T] = size(data); 
