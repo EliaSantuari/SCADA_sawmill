@@ -126,6 +126,6 @@ thr_lavoro = 600000;
 sigma_D = 10; % Incertezza sulla misura del diametro
 sigma_larg = 10; % Incertezza sulla misura della larghezza
 
-sigma_cam = 0.5; % Incertezza della camera
-
+% sigma_cam = k * z_cam
+k = 0.05;
 
