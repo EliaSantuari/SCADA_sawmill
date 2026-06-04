@@ -1,4 +1,4 @@
-z_cam = 20;
+z_cam = 15;
 
 %% GENERO MISURE CON MODELLO DISCRETO
 n = 1000000;

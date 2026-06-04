@@ -2,13 +2,16 @@ clear all;
 close all;
 clc;
 
+% Seed impostato anche nelle matlab function in Simulink
+rng(42, "twister");
+
 %% Simulation
 Tsim = 1800;
 dT = 0.025;
 
 %% Legno
 
-N_log = 60; % Numero tronchi per magazzino
+N_log = 100; % Numero tronchi per magazzino
 
 % Linea 1
 Mag_legno1 = [0 randi([1 5], 1, N_log)];
@@ -20,9 +23,7 @@ Mag_D2 = [0 randi([200 500], 1, N_log)];
 
 % Linea 3
 Mag_legno3 = [0 randi([1 5], 1, N_log)];
-Mag_D3 = [0 randi([200 400], 1, N_log)];
-
-
+Mag_D3 = [0 randi([200 500], 1, N_log)];
 
 Lt = 4; % lunghezza tronchi [m]
 
@@ -70,37 +71,23 @@ SR2 = Rc/Rm2;
 %% PRODOTTI FINALI
 
 % altezze e larghezze di cui dispongo
-h_index = [80, 90, 100];
-l_index = [30, 40, 50];
+h_index = [80, 90, 100, 110];
+l_index = [30, 40, 50, 60];
 
 % righe sono le h e colonne sono le l
 target_matrice = randi([20, 100], length(h_index), length(l_index));
 
 
-% per differenza tra indipendenti e distribuiti
-target_matrice = [50, 50, 50;
-                  50, 50, 50;
-                  50, 50, 50];
 
-% target_matrice = [600, 100;
-%                   100, 100];
+
 
 %% Logica cambio 
 
-change_cost = 60;
+tempo_cambio = 180;
+change_cost = 50;
 
-% PARTO A PRODURRE QUELLI CON PIU' DEFICIT
-deficit = target_matrice;
-[val, idx] = sort(deficit(:), 'descend');
 
-[h_start_1, l_start_1] = ind2sub(size(target_matrice), idx(1));
-[h_start_2, l_start_2] = ind2sub(size(target_matrice), idx(2));
-[h_start_3, l_start_3] = ind2sub(size(target_matrice), idx(3));
-[h_start_4, l_start_4] = ind2sub(size(target_matrice), idx(4));
-[h_start_5, l_start_5] = ind2sub(size(target_matrice), idx(5));
-[h_start_6, l_start_6] = ind2sub(size(target_matrice), idx(6));
-
-% per differenza tra indipendenti e distribuiti
+% Pattern di partenza pre stabilito
 % PRIMA LINEA: taglia (1,1) e (1,1)
 h_start_1 = 1;
 l_start_1 = 1;
@@ -109,13 +96,15 @@ l_start_4 = 1;
 % SECONDA LINEA: taglia (2,1) e (2,2)
 h_start_2 = 2;
 l_start_2 = 1;
-h_start_5 = 1;
-l_start_5 = 2;
+h_start_5 = 2;
+l_start_5 = 1;
 % TERZA LINEA: taglia (3,1) e (3,2)
 h_start_3 = 3;
 l_start_3 = 1;
-h_start_ = 1;
-l_start_6 = 3;
+h_start_6 = 3;
+l_start_6 = 1;
+% PER DIFFERENZA AUTOMATICO e STANDARD
+target_matrice(end,:) = 0;
 
 
 % Soglia di lavoro per cambio lame consumate
@@ -123,9 +112,9 @@ thr_lavoro = 600000;
 
 %% Incertezze sensori
 
-sigma_D = 10; % Incertezza sulla misura del diametro
-sigma_larg = 10; % Incertezza sulla misura della larghezza
+sigma_D = 5; % Incertezza sulla misura del diametro
+sigma_larg = 5; % Incertezza sulla misura della larghezza
 
-sigma_cam = 1; % Incertezza della camera
-
+% sigma_cam = k * z_cam
+k_cam = 0.05;
 
